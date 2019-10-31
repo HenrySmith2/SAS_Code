@@ -1,0 +1,9 @@
+/* SAS code to count the number of observations in a dataset */ 
+
+%macro nvars(data);
+   %let id=%sysfunc(open(&data));
+   %sysfunc(attrn(&id,nvars))
+   %let id=%sysfunc(close(&id));
+%mend nvars;
+
+%put %nvars(libref.dataset);
