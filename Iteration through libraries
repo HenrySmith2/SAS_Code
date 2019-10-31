@@ -1,0 +1,23 @@
+/* SAS code for iteration through all datasets*/ 
+
+%macro contents(data=&syslast);
+
+	proc contents data=&data;
+		title "&data";
+	run;
+
+%mend contents;
+
+%contents
+
+data test;
+	set SASHELP.VSTABVW(keep=libname memname);
+	where memname contains 'STAFF';
+	test1 = cats(libname,".",memname);
+run;
+
+data test;
+	set test;
+	call execute(cats('%contents(data=',test1,')'));
+run; 
+
