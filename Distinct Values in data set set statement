@@ -1,0 +1,5 @@
+data _null_;
+	call execute("proc sql;create table aa as select distinct Club_code,customer_type from orion.club_members;quit;");
+	set aa;
+	call symputx(Club_code,customer_type);
+run;
